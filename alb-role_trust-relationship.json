@@ -1,0 +1,23 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Federated": "arn:aws:iam::<Account ID>:oidc-provider/oidc.eks.eu-west-1.amazonaws.com/id/582C436033398C6CE7DE1251DCC3CCE6"
+      },
+      "Action": "sts:AssumeRoleWithWebIdentity",
+      "Condition": {
+        "StringEquals": {
+          "oidc.eks.eu-west-1.amazonaws.com/id/582C436033398C6CE7DE1251DCC3CCE6:aud": "sts.amazonaws.com",
+          "oidc.eks.eu-west-1.amazonaws.com/id/582C436033398C6CE7DE1251DCC3CCE6:sub": "system:serviceaccount:<namespace>:<service-account-name>"
+        }
+      }
+    }
+  ]
+}
+
+# <namespace> → Kubernetes namespace
+# <Account ID> with your account ID
+# <service-account-name> → Service account name
+# if your region is not eu-west-1 ensure you update that part too
